@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>overthink.it - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-pink: #DE36F6;
+            --neon-green: #8AFC5D;
+            --neon-orange: #E9793A;
+            --black: #000000;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Main Container */
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .floating-question {
+            position: absolute;
+            color: var(--neon-pink);
+            font-size: 2rem;
+            font-weight: bold;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-question:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-question:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+        .floating-question:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+        .floating-question:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+            50% { transform: translateY(-20px) rotate(5deg); opacity: 0.3; }
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--neon-pink);
+            text-shadow: 0 0 30px var(--neon-pink);
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 30px var(--neon-pink); }
+            to { text-shadow: 0 0 50px var(--neon-pink), 0 0 70px var(--neon-pink); }
+        }
+
+        /* Main Teaser Content */
+        .teaser-content {
+            max-width: 800px;
+            margin-bottom: 4rem;
+        }
+
+        .coming-soon {
+            font-size: 2.5rem;
+            color: var(--neon-orange);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px var(--neon-orange);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .teaser-text {
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        /* Quote Frame */
+        .quote-frame {
+            margin: 4rem 0;
+            padding: 3rem;
+            border: 4px solid var(--neon-orange);
+            background: var(--black);
+            box-shadow: 0 0 40px var(--neon-orange);
+            position: relative;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quote-frame::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-orange), var(--neon-pink), var(--neon-orange));
+            z-index: -1;
+            border-radius: 2px;
+        }
+
+        .preview-question {
+            font-size: 2.2rem;
+            color: var(--neon-orange);
+            font-weight: bold;
+            text-shadow: 0 0 25px var(--neon-orange);
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Email Signup */
+        .signup-section {
+            margin: 4rem 0;
+        }
+
+        .signup-title {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+
+        .signup-subtitle {
+            color: var(--white);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .email-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 0;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 1.2rem;
+            background: var(--black);
+            border: 3px solid var(--neon-green);
+            color: var(--white);
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .email-input:focus {
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .email-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .signup-button {
+            padding: 1.2rem 2.5rem;
+            background: var(--neon-pink);
+            color: var(--black);
+            border: 3px solid var(--neon-pink);
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        .signup-button:hover {
+            background: var(--black);
+            color: var(--neon-pink);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--neon-pink);
+        }
+
+        /* Central Visual Element - REMOVED */
+
+        /* Launch Info */
+        .launch-info {
+            margin-top: 4rem;
+            padding: 2rem;
+            border: 2px solid var(--neon-green);
+            background: var(--black);
+            box-shadow: 0 0 30px var(--neon-green);
+        }
+
+        .launch-title {
+            color: var(--neon-orange);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--neon-orange);
+        }
+
+        .launch-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            color: var(--white);
+            padding: 1rem;
+            border: 1px solid var(--neon-pink);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            border-color: var(--neon-orange);
+            box-shadow: 0 0 15px var(--neon-orange);
+        }
+
+        .feature h4 {
+            color: var(--neon-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--neon-pink);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 2px solid transparent;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .copyright {
+            color: var(--white);
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .coming-soon {
+                font-size: 1.8rem;
+            }
+
+            .teaser-text {
+                font-size: 1.2rem;
+            }
+
+            .preview-question {
+                font-size: 1.4rem;
+            }
+
+            .email-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .quote-frame {
+                padding: 2rem;
+                margin: 3rem 0;
+            }
+
+            .preview-question {
+                font-size: 1.6rem;
+            }
+
+            .launch-features {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="floating-question">?</div>
+        <div class="floating-question">?</div>
+        <div class="floating-question">?</div>
+        <div class="floating-question">?</div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">overthink.it</div>
+
+        <!-- Teaser Content -->
+        <div class="teaser-content">
+            <h1 class="coming-soon">Coming Soon</h1>
+            <p class="teaser-text">
+                We're building something extraordinary for deep thinkers. A place where philosophy meets modern design, 
+                where complex questions get the attention they deserve, and where your mind can truly wander into the depths of possibility.
+            </p>
+            
+            <div class="quote-frame">
+                <div class="preview-question" id="philosophyQuote">
+                    "Loading a thought-provoking quote..."
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Signup -->
+        <!-- 
+        <div class="signup-section">
+            <h2 class="signup-title">Be the First to Overthink</h2>
+            <p class="signup-subtitle">Get notified when we launch + receive exclusive early content</p>
+            <form class="email-form">
+                <input type="email" class="email-input" placeholder="your.email@domain.com" required>
+                <button type="submit" class="signup-button">Notify Me</button>
+            </form>
+        </div>
+        -->
+
+        <!-- Launch Info -->
+        <div class="launch-info">
+            <h3 class="launch-title">What's Coming</h3>
+            <div class="launch-features">
+                <div class="feature">
+                    <h4>What If Scenarios</h4>
+                    <p>Mind-bending hypothetical worlds</p>
+                </div>
+                <div class="feature">
+                    <h4>Ethical Dilemmas</h4>
+                    <p>Navigate impossible moral choices</p>
+                </div>
+                <div class="feature">
+                    <h4>Thought Experiments</h4>
+                    <p>Classic and modern philosophical puzzles</p>
+                </div>
+                <div class="feature">
+                    <h4>Complex Questions</h4>
+                    <p>Deep dives into consciousness & reality</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <!-- 
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">Reddit</a>
+            </div>
+            -->
+            <p class="copyright">"Because some thoughts deserve more thinking" • overthink.it © 2025</p>
+        </div>
+    </div>
+
+    <script>
+        // Philosophy Quotes API Integration
+        async function fetchPhilosophyQuote() {
+            try {
+                const response = await fetch('https://philosophy-quotes-api.glitch.me/quotes');
+                const data = await response.json();
+                
+                if (data && data.quote && data.source) {
+                    const quoteElement = document.getElementById('philosophyQuote');
+                    quoteElement.innerHTML = `"${data.quote}"<br><span style="color: var(--neon-orange); font-size: 0.8em; opacity: 0.9;">— ${data.source}</span>`;
+                }
+            } catch (error) {
+                console.log('Using fallback quote');
+                // Fallback quote if API fails
+                const fallbackQuotes = [
+                    { quote: "The unexamined life is not worth living", source: "Socrates" },
+                    { quote: "I think, therefore I am", source: "René Descartes" },
+                    { quote: "The only true wisdom is in knowing you know nothing", source: "Socrates" },
+                    { quote: "What if every decision you make creates an entirely new universe?", source: "Modern Philosophy" }
+                ];
+                const randomQuote = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+                const quoteElement = document.getElementById('philosophyQuote');
+                quoteElement.innerHTML = `"${randomQuote.quote}"<br><span style="color: var(--neon-orange); font-size: 0.8em; opacity: 0.9;">— ${randomQuote.source}</span>`;
+            }
+        }
+
+        // Load quote when page loads
+        document.addEventListener('DOMContentLoaded', fetchPhilosophyQuote);
+
+        // Simple form handling (commented out since form is commented out)
+        /*
+        document.querySelector('.email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.querySelector('.email-input').value;
+            if (email) {
+                alert('Thanks for your interest! We\'ll notify you when we launch.');
+                document.querySelector('.email-input').value = '';
+            }
+        });
+        */
+
+        // Add some interactive background elements
+        document.addEventListener('mousemove', function(e) {
+            const questions = document.querySelectorAll('.floating-question');
+            questions.forEach((q, index) => {
+                const speed = (index + 1) * 0.0001;
+                const x = e.clientX * speed;
+                const y = e.clientY * speed;
+                q.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
